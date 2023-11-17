@@ -1,0 +1,3 @@
+__REPLACE_ROUTE_NAME___default_index:
+    path: __REPLACE_ROUTE__/default
+    controller: __REPLACE_NAMESPACE__\Controller\DefaultController::index

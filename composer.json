@@ -1,0 +1,22 @@
+{
+    "name": "martenasoft/bundlemaker",
+    "description": "MartenaSoft Bundle Maker",
+    "type": "library",
+    "require": {
+        "symfony/console": "5.4.*",
+        "symfony/filesystem": "^4.4|^5.0|^6.0",
+        "symfony/string": "5.4.*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Martenasoft\\Bundlemaker\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Martenasoft",
+            "email": "martena.soft@gmail.com"
+        }
+    ]
+}
