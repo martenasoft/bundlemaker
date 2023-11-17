@@ -19,4 +19,9 @@ class MartenasoftBundlemakerBundle extends Bundle
     {
         $containerConfigurator->import('../config/services.yaml');
     }
+
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Martenasoft\Bundlemaker\DependencyInjection;
 
+use Martenasoft\Bundlemaker\Command\BundleMakerCommand;
 use Martenasoft\Makebundle\Command\BundleCommand;
 use Martenasoft\Makebundle\Command\MakeBundleCommand;
 use Martenasoft\Makebundle\Maker\BundleMaker;
@@ -12,6 +13,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\Filesystem\Filesystem;
 
 class MartenasoftBundlemakerExtension extends Extension
 {
@@ -32,6 +34,11 @@ class MartenasoftBundlemakerExtension extends Extension
         );
 
         $loader->load('services.yaml');
+
+        $definition = new Definition(BundleMakerCommand::class);
+        $definition->addArgument(new Reference('filesystem'));
+        $definition->addTag('console.command', ['command' => BundleMakerCommand::getCommandName()]);
+        $container->setDefinition(BundleMakerCommand::class, $definition);
     }
 }
 
