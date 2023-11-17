@@ -79,11 +79,13 @@ class BundleMakerCommand extends Command
             ->addOption('command',
                 null,
                 InputOption::VALUE_NEGATABLE,
-                'Without command')
+                'Without command'
+            )
             ->addOption('controller',
                 null,
                 InputOption::VALUE_NEGATABLE,
-                'Without controller');
+                'Without controller'
+            );
 
     }
 
@@ -116,25 +118,25 @@ class BundleMakerCommand extends Command
 
         $this->addBundle();
         $this->addConfigService();
-
         $this->addDependencyInjection();
 
 
         $helper = $this->getHelper('question');
-        $question = new ConfirmationQuestion("Do create command? [Y/n]:", false);
+        $question = new ConfirmationQuestion("Do create command? [Y/n]:", true);
 
         if ($isCommand === true || ($isCommand === null && $helper->ask($input, $output, $question))) {
             $this->addCommand();
         }
 
-        $question = new ConfirmationQuestion("Do create controller? [Y/n]:", false);
-        if ($isController === true || ($isController === null && $helper->ask($input, $output, $question))) {
+
+        $question = new ConfirmationQuestion("Do create controller? [Y/n]:", true);
+        if ($isController === true ||
+            ($isController === null && ($isController = $helper->ask($input, $output, $question)))) {
             $this->addRoutesService();
             $this->addController();
-            $isController = true;
         }
 
-        $this->afterSave(!empty($isController), $output);
+        $this->afterSave($isController, $output);
 
         return Command::SUCCESS;
     }
